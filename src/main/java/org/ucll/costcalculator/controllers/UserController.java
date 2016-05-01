@@ -6,6 +6,7 @@
 package org.ucll.costcalculator.controllers;
 
 import facade.CostCalculatorFacade;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +28,22 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void register(@RequestBody Owner owner) {
-        System.out.println("Jaha");
-        //costFacade.addUser(owner);
+        costFacade.addUser(owner);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Owner> getAllOwners(){
+        return costFacade.getAllUsers();
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/getByEmail", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Owner getOwnerByEmail(@RequestBody Owner owner){
+        return costFacade.getUserByEmail(owner.getEmail());
+    }
+    
+    @RequestMapping(method=RequestMethod.POST, value = "/deleteUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteOwner(@RequestBody Owner owner){
+        costFacade.deleteUser(owner); 
     }
 
 }

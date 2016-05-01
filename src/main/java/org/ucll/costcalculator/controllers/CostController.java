@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import owner.domain.Owner;
-import static owner.domain.Owner_.email;
 
 /**
  *
@@ -28,20 +27,29 @@ public class CostController {
     @Autowired
     CostCalculatorFacade costFacade;
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveCost(@RequestBody Cost cost) {
         costFacade.addCost(cost);
     }
     
-    @RequestMapping(method = RequestMethod.POST, value="/byemail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value="/byEmail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Cost> getCostsByEmail(@RequestBody Owner owner){
-        System.out.println("email:" +owner.getEmail());
         return costFacade.getCostsByEmail(owner.getEmail());
     }
     
-    @RequestMapping(method = RequestMethod.GET, value="allcosts", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, value="allCosts", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Cost> getCostsByEmail(){
         return costFacade.getAllCosts();
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "deleteCost")
+    public void deleteCostById(@RequestBody Cost cost){
+        costFacade.deleteCost(cost);
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "updateCost")
+    public void updateCost(@RequestBody Cost costNew){
+        costFacade.updateCost(costNew);
     }
 
 }
