@@ -53,8 +53,8 @@ public class CostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/getCostById")
-    public void getCostById(@RequestBody Cost costNew){
-        costFacade.getCostById(costNew.getId());
+    public Cost getCostById(@RequestBody Cost costNew){
+        return costFacade.getCostById(costNew.getId());
     }
     
 }
