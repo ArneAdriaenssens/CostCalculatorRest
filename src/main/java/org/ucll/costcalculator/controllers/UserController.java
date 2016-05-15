@@ -45,5 +45,10 @@ public class UserController {
     public void deleteOwner(@RequestBody Owner owner){
         costFacade.deleteUser(owner); 
     }
+    
+    @RequestMapping(method=RequestMethod.POST, value = "/updateUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateOwner(@RequestBody Owner owner){
+        costFacade.updateUser(owner);
+    }
 
 }
