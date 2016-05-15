@@ -42,17 +42,17 @@ public class CostController {
         return costFacade.getAllCosts();
     }
     
-    @RequestMapping(method = RequestMethod.POST, value = "/deleteCost")
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteCost", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void deleteCostById(@RequestBody Cost cost){
         costFacade.deleteCost(cost);
     }
     
-    @RequestMapping(method = RequestMethod.POST, value = "/updateCost")
+    @RequestMapping(method = RequestMethod.POST, value = "/updateCost", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCost(@RequestBody Cost costNew){
         costFacade.updateCost(costNew);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/getCostById")
+    @RequestMapping(method = RequestMethod.POST, value = "/getCostById", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Cost getCostById(@RequestBody Cost costNew){
         return costFacade.getCostById(costNew.getId());
     }
